@@ -1,0 +1,24 @@
+<form id="modal-create" class="modal fade" action="{{ route('admin.kategori.store') }}" method="post" autocomplete="off">
+	@csrf
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Tambah Kategori</h4>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>x</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Nama <span class="font-weight-bold text-danger">*</span></label>
+					<input type="text" name="name" class="form-control" required>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<button type="submit" class="btn btn-primary">Simpan</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
+			</div>
+		</div>
+	</div>
+</form>
