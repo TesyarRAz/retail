@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(DetailTransaksi::class)->whereNull('transaksi_id');
     }
+
+    public function transaksis()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function checkouts()
+    {
+        return $this->hasMany(Transaksi::class)->whereNull('bukti_transaksi');
+    }
 }

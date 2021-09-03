@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\DetailTransaksi;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
@@ -16,8 +17,9 @@ class KeranjangController extends Controller
     public function index()
     {
         $keranjangs = auth()->user()->keranjangs()->select('detail_transaksis.*')->with('produk')->get();
+        $checkouts = auth()->user()->checkouts;
 
-        return view('customer.keranjang.index', compact('keranjangs'));
+        return view('customer.keranjang.index', compact('keranjangs', 'checkouts'));
     }
 
     /**
@@ -38,18 +40,29 @@ class KeranjangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $total = auth()->user()->keranjangs->sum('price_total');
+
+        $transaksi = auth()->user()->transaksis()->create([
+            'invoice' => \Str::random(10),
+            'price_total' => $total,
+        ]);
+
+        $transaksi->details()->saveMany(auth()->user()->keranjangs);
+
+        return redirect()->route('customer.keranjang.show', $transaksi->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DetailTransaksi  $keranjang
+     * @param  \App\Models\Transaksi  $keranjang
      * @return \Illuminate\Http\Response
      */
-    public function show(DetailTransaksi $keranjang)
+    public function show(Transaksi $keranjang)
     {
-        //
+        return view('customer.keranjang.show', [
+            'transaksi' => $keranjang
+        ]);
     }
 
     /**
@@ -72,7 +85,19 @@ class KeranjangController extends Controller
      */
     public function update(Request $request, DetailTransaksi $keranjang)
     {
-        //
+        $data = $request->validate([
+            'bukti_transaksi' => 'required|file|image',
+        ]);
+
+        $data['bukti_transaksi'] = $request->bukti_transaksi->storeAs(
+            'user/' . auth()->user()->username . '/image',
+            \Str::random(40) . '.' . $request->bukti_transaksi->getClientOriginalExtension(),
+            'public',
+        );
+
+        $keranjang->update($data);
+
+        return redirect()->route('home')->with('status', 'Transaksi anda sedang di proses');
     }
 
     /**

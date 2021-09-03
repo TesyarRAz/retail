@@ -20,7 +20,7 @@ class CreateTransaksisTable extends Migration
             $table->string('invoice');
             $table->integer('price_total');
             
-            $table->string('bukti_transaksi');
+            $table->string('bukti_transaksi')->nullable();
 
             $table->timestamps();
         });
