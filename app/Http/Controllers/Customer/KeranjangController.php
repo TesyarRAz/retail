@@ -14,12 +14,27 @@ class KeranjangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $keranjangs = auth()->user()->keranjangs()->select('detail_transaksis.*')->with('produk')->get();
-        $checkouts = auth()->user()->checkouts;
+        if (!in_array($request->type, ['keranjang', 'checkout', 'selesai']))
+        {
+            return redirect()->route('customer.keranjang.index', ['type' => 'keranjang']);
+        }
 
-        return view('customer.keranjang.index', compact('keranjangs', 'checkouts'));
+        if ($request->type == 'keranjang')
+        {
+            $datas = auth()->user()->keranjangs()->select('detail_transaksis.*')->with('produk')->get();
+        }
+        else if ($request->type == 'checkout')
+        {
+            $datas = auth()->user()->checkouts;
+        }
+        else if ($request->type == 'selesai')
+        {
+            $datas = auth()->user()->transaksis()->where('selesai', true)->get();
+        }
+
+        return view('customer.keranjang.index', compact('datas'));
     }
 
     /**
@@ -83,10 +98,10 @@ class KeranjangController extends Controller
      * @param  \App\Models\DetailTransaksi  $keranjang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetailTransaksi $keranjang)
+    public function update(Request $request, Transaksi $keranjang)
     {
         $data = $request->validate([
-            'bukti_transaksi' => 'required|file|image',
+            'bukti_transaksi' => 'required|file|image|max:1024',
         ]);
 
         $data['bukti_transaksi'] = $request->bukti_transaksi->storeAs(
@@ -94,6 +109,8 @@ class KeranjangController extends Controller
             \Str::random(40) . '.' . $request->bukti_transaksi->getClientOriginalExtension(),
             'public',
         );
+
+        $data['keterangan_ditolak'] = null;
 
         $keranjang->update($data);
 

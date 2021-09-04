@@ -7,6 +7,7 @@
 @section('content')
 
 @include('admin.produk.create')
+@include('admin.produk.edit')
 
 <div class="card">
 	<div class="card-header">

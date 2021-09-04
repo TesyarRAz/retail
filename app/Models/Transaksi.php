@@ -11,8 +11,17 @@ class Transaksi extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'bukti_transaksi' => 'App\Casts\PublicFileCast',
+    ];
+
     public function details()
     {
         return $this->hasMany(DetailTransaksi::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

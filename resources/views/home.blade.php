@@ -50,7 +50,7 @@
 			<div class="row align-items-center mt-3">
 				@foreach ($kategoris as $item)
 				<div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-					<a href="#" class="fw-bold btn btn-lg btn-success">{{ $item->name }}</a>
+					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="fw-bold btn btn-lg btn-success">{{ $item->name }}</a>
 				</div>
 				@endforeach
 			</div>
@@ -75,7 +75,7 @@
 			<div class="col-lg-3 col-md-4 col-sm-6">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
-						<img class="card-img-top" src="{{ \Storage::disk('public')->url($item->image) }}" alt="">
+						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
 						<div class="card-body">
 							<span class="badge small bg-success">{{ $item->kategori->name }}</span>
 							<span class="text-break d-block">{{$item->name }}</span>
@@ -106,7 +106,7 @@
 			<div class="col-lg-3 col-md-4 col-sm-6">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
-						<img class="card-img-top" src="{{ \Storage::disk('public')->url($item->image) }}" alt="">
+						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
 						<div class="card-body">
 							<span class="badge small bg-success">{{ $item->kategori->name }}</span>
 							<span class="text-break d-block">{{$item->name }}</span>
@@ -119,5 +119,11 @@
 		</div>
 	</div>
 </div>
+
+
+
+<footer class="text-center mt-3 mb-3 fw-bold">
+	Copyright &copy; MBCorp 2021
+</footer>
 
 @endsection

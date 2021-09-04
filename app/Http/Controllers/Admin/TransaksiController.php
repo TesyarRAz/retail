@@ -13,9 +13,94 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            return datatables()->of(
+                Transaksi::select('transaksis.*')->whereNotNull('bukti_transaksi')->with('details', 'user')->latest(),
+            )
+            ->editColumn('price_total', function($row) {
+                return number_format($row->price_total, 0, ',', '.');
+            })
+            ->editColumn('bukti_transaksi', function($row) {
+                $url = $row->bukti_transaksi;
+
+                return <<< blade
+                <img src="$url" class="img-thumbnail">
+                blade;
+            })
+            ->addColumn('status', function($row) {
+                if ($row->selesai)
+                {
+                    return '<span class="badge badge-primary">Selesai</span>';
+                }
+
+                if ($row->keterangan_ditolak)
+                {
+                    return '<span class="badge badge-danger">Ditolak</span>';
+                }
+
+                return '<span class="badge badge-success">Menunggu Dikonfirmasi</span>';
+            })
+            ->addColumn('aksi', function($row) {
+                $id = $row->id;
+
+                $csrf = csrf_field();
+                $delete = method_field('delete');
+
+                $show_route = route('admin.transaksi.show', $id);
+                $delete_route = route('admin.transaksi.destroy', $id);
+
+                $disable_tolak = $row->selesai ? 'disabled' : '';
+
+                return <<< blade
+                <a class="btn btn-sm btn-primary mb-1" href="$show_route">
+                    <i class="fas fa-fw fa-book"></i>
+                    Invoice
+                </a>
+                <button class="btn btn-sm mb-1 btn-danger" type="button" onclick="tolak('$id')" $disable_tolak>
+                    <i class="fas fa-fw fa-trash"></i>
+                    Tolak
+                </button>
+                blade;
+            })
+            ->addIndexColumn()
+            ->rawColumns(['bukti_transaksi', 'status', 'aksi'])
+            ->make(true);
+        }
+
+        $datatable = app('datatables.html')
+        ->columns([
+            [
+                'data' => 'user.name',
+                'title' => 'Name',
+            ],
+            [
+                'data' => 'price_total',
+                'title' => 'Total Belanja',
+            ],
+            [
+                'data' => 'bukti_transaksi',
+                'title' => 'Bukti Transaksi',
+            ],
+            [
+                'data' => 'status',
+                'title' => 'Status',
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'title' => 'Aksi',
+                'data' => 'aksi',
+                'searchable' => false,
+                'orderable' => false,
+            ]
+        ])
+        ->orderBy(0)
+        ->minifiedAjax();
+
+        return view('admin.transaksi.index', compact('datatable'));
     }
 
     /**
@@ -45,9 +130,14 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaksi $transaksi)
+    public function show(Request $request, Transaksi $transaksi)
     {
-        //
+        if ($request->ajax())
+        {
+            return response($transaksi);
+        }
+
+        return view('admin.transaksi.show', compact('transaksi'));
     }
 
     /**
@@ -70,7 +160,22 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, Transaksi $transaksi)
     {
-        //
+        if ($request->type == 'tolak')
+        {
+            $data = $request->validate([
+                'keterangan_ditolak' => 'required',
+            ]);
+
+            $transaksi->update($data);
+
+            return back()->with('status', 'Berhasil melakukan penolakan');
+        }
+
+        $transaksi->update([
+            'selesai' => true
+        ]);
+
+        return redirect()->route('admin.transaksi.index')->with('status', 'Berhasil melakukan konfirmasi');
     }
 
     /**

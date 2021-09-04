@@ -14,7 +14,7 @@
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col-md-6">
-						<img src="{{ \Storage::disk('public')->url($produk->image) }}" class="img-thumbnail">
+						<img src="{{ $produk->image }}" class="img-thumbnail">
 					</div>
 					<div class="col-md-6">
 						<span class="badge bg-primary">{{ $produk->kategori->name }}</span>
@@ -58,9 +58,9 @@
 						</div>
 
 						<div class="mt-5">
-							<button class="btn btn-sm btn-outline-success w-100">
+							<a href="{{ route('customer.produk.index', ['kategori' => $produk->kategori->name]) }}" class="btn btn-sm btn-outline-success w-100">
 								Info
-							</button>
+							</a>
 						</div>
 					</div>
 				</div>

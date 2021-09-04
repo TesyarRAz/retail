@@ -1,10 +1,11 @@
-<form id="modal-create" class="modal fade" action="{{ route('admin.produk.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
+<form id="modal-edit" class="modal fade" method="post" autocomplete="off" enctype="multipart/form-data">
 	@csrf
+	@method('put')
 
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Tambah Produk</h4>
+				<h4 class="modal-title">Edit Produk</h4>
 				<button type="button" class="close" data-dismiss="modal">
 					<span>x</span>
 				</button>
@@ -43,3 +44,27 @@
 		</div>
 	</div>
 </form>
+
+@push('js')
+<script type="text/javascript">
+	$(function() {
+		let modal = $("#modal-edit");
+
+		window.edit = (id) => {
+			modal.find("input[name=image]").attr('src', '{{ asset('assets/images/empty-image.png') }}');
+
+			let url_target = `{{ url('admin/produk') }}/${id}`;
+			$.getJSON(url_target, function(data) {
+				modal.find("input,textarea").val(function(index, value) {
+					return ['_method', '_token', 'image'].includes(this.name) ? value : (data[this.name]);
+				}).trigger("input");
+
+				modal.find("input[name=image]").siblings('img[data-target]').attr('src', data.image);
+
+				modal.attr('action', url_target);
+				modal.modal();
+			});
+		}
+	});
+</script>
+@endpush

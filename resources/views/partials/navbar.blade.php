@@ -6,8 +6,8 @@
             </a>
 
             <div class="w-100 d-none d-lg-block">
-                <form class="d-flex ms-2">
-                    <input class="form-control form-control-sm me-1" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex ms-2" action="{{ route('customer.produk.index') }}" method="get">
+                    <input class="form-control form-control-sm me-1" type="search" name="search" placeholder="Search" value="{{ request('search') }}">
                     <button class="btn btn-sm btn-success" type="submit">
                         <i class="fas fa-fw fa-search"></i>
                     </button>
@@ -26,7 +26,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item position-relative">
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="fas fa-fw fa-user"></i>
                         </a>
@@ -46,8 +46,8 @@
         </div>
     </div>
     <div class="container d-block d-lg-none">
-        <form class="d-flex">
-            <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" action="{{ route('customer.produk.index') }}" method="get">
+            <input class="form-control form-control-sm me-2" type="search" name="search" placeholder="Search" value="{{ request('search') }}">
             <button class="btn btn-sm btn-success" type="submit">
                 <i class="fas fa-fw fa-search"></i>
             </button>

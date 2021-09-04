@@ -13,6 +13,7 @@ class Produk extends Model
 
     protected $casts = [
         'price' => 'App\Casts\MaskMoneyCast',
+        'image' => 'App\Casts\PublicFileCast',
     ];
 
     public function scopeTerlaris($query)

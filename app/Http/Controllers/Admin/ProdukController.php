@@ -25,7 +25,7 @@ class ProdukController extends Controller
                 return number_format($row->price, 0, ',', '.');
             })
             ->editColumn('image', function($row) {
-                $url = \Storage::disk('public')->url($row->image);
+                $url = $row->image;
 
                 return <<< blade
                 <img src="$url" class="img-thumbnail" width="100" height="100">

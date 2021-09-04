@@ -8,14 +8,30 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->has('search'))
+        {
+
+        }
+
+        $data = Produk::query()
+            ->when($request->has('search'), fn($query) => $query->where('name', 'like', '%' . $request->search . '%'))
+            ->when($request->has('kategori'), fn($query) => $query->whereHas('kategori', fn($query) => $query->where('name', $request->kategori)))
+            ->with('kategori')
+            ->cursorPaginate(20);
+
+        return view('customer.produk.index', compact('data'));
     }
 
     /**

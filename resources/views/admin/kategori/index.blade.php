@@ -7,6 +7,7 @@
 @section('content')
 
 @include('admin.kategori.create')
+@include('admin.kategori.edit')
 
 <div class="card">
 	<div class="card-header">

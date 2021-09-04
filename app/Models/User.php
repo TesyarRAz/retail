@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function checkouts()
     {
-        return $this->hasMany(Transaksi::class)->whereNull('bukti_transaksi');
+        return $this->hasMany(Transaksi::class)->where('selesai', false);
     }
 }

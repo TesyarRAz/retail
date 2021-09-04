@@ -22,6 +22,9 @@ class CreateTransaksisTable extends Migration
             
             $table->string('bukti_transaksi')->nullable();
 
+            $table->string('keterangan_ditolak')->nullable();
+            $table->boolean('selesai')->default(false);
+
             $table->timestamps();
         });
     }
