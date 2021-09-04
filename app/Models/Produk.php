@@ -19,7 +19,7 @@ class Produk extends Model
     public function scopeTerlaris($query)
     {
         return $query->addSelect([
-            'popularity' => DetailTransaksi::whereColumn('produk_id', 'produks.id')->where('status', 'checkout')->selectRaw('COUNT(id)'),
+            'popularity' => DetailTransaksi::whereColumn('produk_id', 'produks.id')->where('selesai', true)->selectRaw('COUNT(id)'),
         ])
         ->orderByDesc('popularity');
     }
