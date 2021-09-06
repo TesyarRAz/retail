@@ -63,7 +63,7 @@
 			<div class="col-2">
 				<h4 class="fw-bold">Terlaris</h4>
 			</div>
-			<div class="col-10">
+			<div class="col-auto">
 				<hr>
 			</div>
 		</div>
@@ -94,7 +94,7 @@
 			<div class="col-2">
 				<h4 class="fw-bold">Terbaru</h4>
 			</div>
-			<div class="col-10">
+			<div class="col-auto">
 				<hr>
 			</div>
 		</div>
@@ -103,6 +103,37 @@
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
 			@foreach ($terbaru as $item)
+			<div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
+					<div class="card shadow">
+						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
+						<div class="card-body">
+							<span class="badge small bg-success">{{ $item->kategori->name }}</span>
+							<span class="text-break d-block">{{$item->name }}</span>
+							<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+						</div>
+					</div>
+				</a>
+			</div>
+			@endforeach
+		</div>
+	</div>
+
+	<!-- Terbaru -->
+	<div class="my-3">
+		<div class="row">
+			<div class="col-2">
+				<h4 class="fw-bold">Produk</h4>
+			</div>
+			<div class="col-auto">
+				<hr>
+			</div>
+		</div>
+		<div class="row align-items-center">
+			<div class="col-lg-2 col-md-4 col-sm-6 d-none d-lg-block">
+				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
+			</div>
+			@foreach ($produks as $item)
 			<div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">

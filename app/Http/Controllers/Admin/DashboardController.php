@@ -9,6 +9,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.index');
+        $data = new \stdClass;
+
+        $data->pesanan_baru = \App\Models\Transaksi::whereDate('created_at', now())->count();
+        $data->new_user = \App\Models\User::whereDate('created_at', now())->count();
+
+        return view('admin.dashboard.index', compact('data'));
     }
 }

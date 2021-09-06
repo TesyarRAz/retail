@@ -23,7 +23,8 @@ class HomeController extends Controller
 
         $terlaris = Produk::terlaris()->with('kategori')->take(5)->get();
         $terbaru = Produk::latest()->with('kategori')->take(5)->get();
+        $produks = Produk::inRandomOrder()->with('kategori')->take(5)->get();
 
-        return view('home', compact('terlaris', 'terbaru', 'kategoris'));
+        return view('home', compact('terlaris', 'terbaru', 'kategoris', 'produks'));
     }
 }
