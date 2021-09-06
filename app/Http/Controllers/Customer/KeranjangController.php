@@ -57,10 +57,16 @@ class KeranjangController extends Controller
     {
         $total = auth()->user()->keranjangs->sum('price_total');
 
-        $transaksi = auth()->user()->transaksis()->create([
-            'invoice' => \Str::random(10),
-            'price_total' => $total,
+        $data = $request->validate([
+            'jenis' => 'required|in:diambil,dikirim',
+            'pengiriman_via' => 'required_if:jenis,dikirim',
+            'alamat_pengiriman' => 'required_if:jenis,dikirim',
         ]);
+
+        $data['invoice'] = strtoupper(\Str::random(10));
+        $data['price_total'] = $total;
+
+        $transaksi = auth()->user()->transaksis()->create($data);
 
         $transaksi->details()->saveMany(auth()->user()->keranjangs);
 
@@ -100,21 +106,24 @@ class KeranjangController extends Controller
      */
     public function update(Request $request, Transaksi $keranjang)
     {
-        $data = $request->validate([
-            'bukti_transaksi' => 'required|file|image|max:1024',
-        ]);
+        if ($request->type == 'bukti')
+        {
+            $data = $request->validate([
+                'bukti_transaksi' => 'required|file|image|max:1024',
+            ]);
 
-        $data['bukti_transaksi'] = $request->bukti_transaksi->storeAs(
-            'user/' . auth()->user()->username . '/image',
-            \Str::random(40) . '.' . $request->bukti_transaksi->getClientOriginalExtension(),
-            'public',
-        );
+            $data['bukti_transaksi'] = $request->bukti_transaksi->storeAs(
+                'user/' . auth()->user()->username . '/image',
+                \Str::random(40) . '.' . $request->bukti_transaksi->getClientOriginalExtension(),
+                'public',
+            );
 
-        $data['keterangan_ditolak'] = null;
+            $data['keterangan_ditolak'] = null;
 
-        $keranjang->update($data);
+            $keranjang->update($data);
 
-        return redirect()->route('home')->with('status', 'Transaksi anda sedang di proses');
+            return redirect()->route('customer.keranjang.index', ['type' => 'checkout'])->with('status', 'Transaksi anda sedang di proses');
+        }
     }
 
     /**

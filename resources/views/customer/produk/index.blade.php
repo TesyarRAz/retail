@@ -21,7 +21,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 				<div class="card shadow">
-					<img class="card-img-top" src="{{ $item->image }}" width="200" height="200 alt="">
+					<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
 					<div class="card-body">
 						<span class="badge small bg-success">{{ $item->kategori->name }}</span>
 						<span class="text-break d-block">{{$item->name }}</span>
@@ -31,6 +31,10 @@
 			</a>
 		</div>
 		@endforeach
+	</div>
+
+	<div class="d-flex justify-content-end">
+		{{ $data->render() }}
 	</div>
 	@else
 	<h5 class="fw-bold">Tidak ada produk</h5>

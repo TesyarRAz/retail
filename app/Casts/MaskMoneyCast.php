@@ -17,7 +17,7 @@ class MaskMoneyCast implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return str_replace('.', '', $value);
+        return optional($value, fn($v) => str_replace('.', '', $v));
     }
 
     /**
@@ -31,6 +31,6 @@ class MaskMoneyCast implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        return str_replace('.', '', $value);
+        return optional($value, fn($v) => str_replace('.', '', $v));
     }
 }

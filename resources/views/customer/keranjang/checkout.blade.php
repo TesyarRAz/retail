@@ -5,16 +5,20 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<div>
 				Invoice - <span class="fw-bold">{{ $checkout->invoice }}</span>
-				<span class="text-muted d-block small">{{ $checkout->created_at->format('d-m-Y') }}</span>
+				<div>
+					@if ($checkout->jenis == 'dikirim' && blank($checkout->ongkir))
+					<span class="badge bg-danger">Ongkir belum diatur admin</span>
+					@elseif (blank($checkout->bukti_transaksi))
+					<span class="badge bg-danger">Belum Upload Bukti</span>
+					@elseif(filled($checkout->keterangan_ditolak))
+					<span class="badge bg-danger">Ditolak</span>
+					@else
+					<span class="badge bg-success">Menunggu Dikonfirmasi</span>	
+					@endif
+				</div>
 			</div>
 			<div class="text-start">
-				@if (blank($checkout->bukti_transaksi))
-				<span class="badge bg-danger">Belum Upload Bukti</span>
-				@elseif(filled($checkout->keterangan_ditolak))
-				<span class="badge bg-danger">Ditolak</span>
-				@else
-				<span class="badge bg-success">Menunggu Dikonfirmasi</span>	
-				@endif
+				<span class="text-muted d-block small">{{ $checkout->created_at->format('d-m-Y') }}</span>
 			</div>
 		</div>
 	</a>

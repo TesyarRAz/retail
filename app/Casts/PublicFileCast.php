@@ -17,7 +17,7 @@ class PublicFileCast implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return \Storage::disk('public')->url($value);
+        return optional($value, fn($v) => \Storage::disk('public')->url($value));
     }
 
     /**

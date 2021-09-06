@@ -20,11 +20,6 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('search'))
-        {
-
-        }
-
         $data = Produk::query()
             ->when($request->has('search'), fn($query) => $query->where('name', 'like', '%' . $request->search . '%'))
             ->when($request->has('kategori'), fn($query) => $query->whereHas('kategori', fn($query) => $query->where('name', $request->kategori)))
@@ -59,18 +54,18 @@ class ProdukController extends Controller
 
         $produk = Produk::findOrFail($data['produk_id']);
 
+        $detail = auth()->user()->keranjangs()->firstOrNew(\Arr::only($data, ['produk_id']));
+
+        $detail->qty = ($detail->qty ?? 0) + $data['qty'];
+        $detail->price_total = $detail->qty * $produk->price;
+        $detail->save();
+
         if ($request->type == 'checkout')
         {
-
+            return redirect()->route('customer.keranjang.index');
         }
         else if ($request->type == 'keranjang')
         {
-            $detail = auth()->user()->keranjangs()->firstOrNew(\Arr::only($data, ['produk_id']));
-
-            $detail->qty = ($detail->qty ?? 0) + $data['qty'];
-            $detail->price_total = $detail->qty * $produk->price;
-            $detail->save();
-
             return back()->with('status', 'Berhasil masukan ke keranjang');
         }
     }

@@ -44,13 +44,13 @@
 	<!-- Kategori -->
 	<div class="card mt-4 shadow">
 		<div class="card-body">
-			<span class="card-title fw-bold h4">Kategori</span>
+			<span class="card-title fw-bold fs-6">Kategori</span>
 			<hr>
 
-			<div class="row align-items-center mt-3">
+			<div class="row align-items-center">
 				@foreach ($kategoris as $item)
 				<div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="fw-bold btn btn-lg btn-success">{{ $item->name }}</a>
+					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="fw-bold btn btn-success">{{ $item->name }}</a>
 				</div>
 				@endforeach
 			</div>
@@ -72,7 +72,7 @@
 				<img src="{{ asset('assets/images/iklan.jpg') }}" alt="">
 			</div>
 			@foreach ($terlaris as $item)
-			<div class="col-lg-3 col-md-4 col-sm-6">
+			<div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
 						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
@@ -103,7 +103,7 @@
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
 			@foreach ($terbaru as $item)
-			<div class="col-lg-3 col-md-4 col-sm-6">
+			<div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
 						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">

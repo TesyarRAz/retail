@@ -53,7 +53,7 @@
 
 						<div class="text-center">
 							<div class="badge bg-primary">
-								<span class="h5 fw-bold">BDP</span>
+								<span class="h5 fw-bold">{{ $produk->kategori->name }}</span>
 							</div>
 						</div>
 

@@ -13,6 +13,7 @@ class Transaksi extends Model
 
     protected $casts = [
         'bukti_transaksi' => 'App\Casts\PublicFileCast',
+        'ongkir' => 'App\Casts\MaskMoneyCast',
     ];
 
     public function details()

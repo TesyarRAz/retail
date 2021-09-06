@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="row justify-content-center mt-5">
-		<div class="col-8">
+		<div class="col-lg-8 col-md-10">
 			<form class="p-3 border" action="{{ route('postRegister') }}" method="post" autocomplete="off">
 				@csrf
 
@@ -48,15 +48,6 @@
 						@enderror
 					</div>
 					<a class="text-decoration-none" href="{{ route('login') }}">Sudah punya akun</a>
-
-					<div class="my-2">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="remember_me" value="1" id="remember_me">
-							<label class="form-check-label" for="remember_me">
-								Remember me
-							</label>
-						</div>
-					</div>
 
 					<div class="d-flex justify-content-end my-3">
 						<button type="submit" class="btn btn-sm btn-success">Login</button>

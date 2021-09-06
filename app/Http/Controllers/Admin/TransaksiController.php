@@ -18,7 +18,9 @@ class TransaksiController extends Controller
         if ($request->ajax())
         {
             return datatables()->of(
-                Transaksi::select('transaksis.*')->whereNotNull('bukti_transaksi')->with('details', 'user')->latest(),
+                Transaksi::select('transaksis.*')->where(fn($query) => 
+                    $query->where('jenis', 'diambil')->whereNotNull('bukti_transaksi')
+                )->orWhere('jenis', 'dikirim')->with('details', 'user')->latest(),
             )
             ->editColumn('price_total', function($row) {
                 return number_format($row->price_total, 0, ',', '.');
@@ -26,8 +28,13 @@ class TransaksiController extends Controller
             ->editColumn('bukti_transaksi', function($row) {
                 $url = $row->bukti_transaksi;
 
+                if (blank($url))
+                {
+                    return 'Tidak ada';
+                }
+
                 return <<< blade
-                <img src="$url" class="img-thumbnail">
+                <a href="$url" target="_blank" class="btn btn-sm btn-primary">Buka</a>
                 blade;
             })
             ->addColumn('status', function($row) {
@@ -39,6 +46,16 @@ class TransaksiController extends Controller
                 if ($row->keterangan_ditolak)
                 {
                     return '<span class="badge badge-danger">Ditolak</span>';
+                }
+
+                if ($row->jenis == 'dikirim' && blank($row->ongkir))
+                {
+                    return '<span class="badge badge-danger">Ongkir belum diatur</span>';
+                }
+
+                if (blank($row->bukti_transaksi))
+                {
+                    return '<span class="badge badge-danger">Bukti transaksi belum dikirim</span>';
                 }
 
                 return '<span class="badge badge-success">Menunggu Dikonfirmasi</span>';
@@ -171,11 +188,25 @@ class TransaksiController extends Controller
             return back()->with('status', 'Berhasil melakukan penolakan');
         }
 
-        $transaksi->update([
-            'selesai' => true
-        ]);
+        if ($request->type == 'konfirmasi')
+        {
+            $transaksi->update([
+                'selesai' => true
+            ]);
 
-        return redirect()->route('admin.transaksi.index')->with('status', 'Berhasil melakukan konfirmasi');
+            return redirect()->route('admin.transaksi.index')->with('status', 'Berhasil melakukan konfirmasi');
+        }
+
+        if ($request->type == 'ongkir')
+        {
+            $data = $request->validate([
+                'ongkir' => 'required',
+            ]);
+            
+            $transaksi->update($data);
+
+            return back()->with('status', 'Berhasil mengatur ongkir');
+        }
     }
 
     /**
@@ -186,6 +217,6 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        //
+        
     }
 }

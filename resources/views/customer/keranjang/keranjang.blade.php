@@ -39,15 +39,47 @@
 <span class="d-block">Total</span>
 <span class="fw-bold">Rp. {{ number_format($datas->sum('price_total'), 0, ',', '.') }}</span>
 
-<div class="d-flex justify-content-end mt-5 mb-5">
-	<form action="{{ route('customer.keranjang.store') }}" method="post">
-		@csrf
 
-		<button type="submit" class="btn btn-success">
-			Checkout
-		</button>
-	</form>
-</div>
+
+<form class="my-5" action="{{ route('customer.keranjang.store') }}" method="post">
+	@csrf
+
+	<input type="hidden" name="type" value="pengambilan">
+	
+	<h4>Metode Pengambilan Barang</h4>
+	<hr>
+	<div class="form-check">
+		<input class="form-check-input" type="radio" name="jenis" id="jenis_diambil" value="diambil" onchange="this.value && document.querySelector('#info_pengiriman').classList.add('d-none')" checked>
+		<label class="form-check-label" for="jenis_diambil">
+			Diambil
+		</label>
+	</div>
+	<div class="form-check">
+		<input class="form-check-input" type="radio" name="jenis" id="jenis_dikirim" value="dikirim" onchange="this.value && document.querySelector('#info_pengiriman').classList.remove('d-none')">
+		<label class="form-check-label" for="jenis_dikirim">
+			Dikirim
+		</label>
+	</div>
+	<div class="my-2 d-none" id="info_pengiriman">
+		<div class="mb-2">
+			<input type="text" name="pengiriman_via" class="form-control" placeholder="Pengiriman (JNE, JNT, dll)">
+		</div>
+		<div class="mb-2">
+			<textarea class="form-control" name="alamat_pengiriman" placeholder="Alamat"></textarea>
+		</div>
+	</div>
+	<span class="text-danger small fw-bold">Ketika sudah disimpan, metode pengambilan tidak bisa dirubah lagi</span>
+
+	<div class="d-flex justify-content-end mt-5 mb-5">
+		<form action="{{ route('customer.keranjang.store') }}" method="post">
+			@csrf
+
+			<button type="submit" class="btn btn-success">
+				Checkout
+			</button>
+		</form>
+	</div>
+</form>
 @else
 <span class="fw-bold">- Kosong -</span>
 @endif
