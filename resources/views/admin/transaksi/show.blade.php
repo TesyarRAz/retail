@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="row">
-	<div class="col-lg-7">
+	<div class="col-lg-7 mb-2">
 		<div class="card shadow">
 			<div class="card-body">
 				<form action="{{ route('admin.transaksi.update', $transaksi->id) }}" method="post">
@@ -55,7 +55,7 @@
 		</div>
 	</div>
 
-	<div id="invoice-print" class="col-lg-5">
+	<div id="invoice-print" class="col-lg-5 mb-5">
 		<div class="card shadow text-monospace">
 			<div class="card-body">
 				<div class="text-center">

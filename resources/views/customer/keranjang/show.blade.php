@@ -64,7 +64,7 @@
 		<span class="d-block">Total</span>
 		<span class="fw-bold">Rp. {{ number_format($transaksi->details->sum('price_total'), 0, ',', '.') }}</span>
 	</div>
-	<div class="mt-2">
+	<div class="mt-2 @if ($transaksi->jenis == 'diambil') d-none @endif">
 		<span class="d-block">Ongkos Kirim</span>
 		<span class="fw-bold">
 			@if (filled($transaksi->ongkir))
@@ -84,13 +84,13 @@
 				{{ ucfirst($transaksi->jenis) }}
 			</div>
 		</div>
-		<div class="row" @if ($transaksi->jenis == 'diambil') d-none @endif>
+		<div class="row @if ($transaksi->jenis == 'diambil') d-none @endif">
 			<div class="col-lg-2 col-md-4 col-sm-6">Pengiriman</div>
 			<div class="col-auto fw-bold">
 				{{ $transaksi->pengiriman_via }}
 			</div>
 		</div>
-		<div class="row" @if ($transaksi->jenis == 'diambil') d-none @endif>
+		<div class="row @if ($transaksi->jenis == 'diambil') d-none @endif">
 			<div class="col-lg-2 col-md-4 col-sm-6">Alamat</div>
 			<div class="col-auto fw-bold">
 				{{ ucfirst($transaksi->alamat_pengiriman) }}
