@@ -49,7 +49,7 @@
 
 			<div class="row align-items-center">
 				@foreach ($kategoris as $item)
-				<div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+				<div class="mb-2">
 					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="fw-bold btn btn-success">{{ $item->name }}</a>
 				</div>
 				@endforeach
