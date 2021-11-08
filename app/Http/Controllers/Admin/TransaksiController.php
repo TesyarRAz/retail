@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaksi;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -36,6 +37,9 @@ class TransaksiController extends Controller
                 return <<< blade
                 <a href="$url" target="_blank" class="btn btn-sm btn-primary">Buka</a>
                 blade;
+            })
+            ->editColumn('created_at', function($row) {
+                return $row->created_at->format('d-m-Y');
             })
             ->addColumn('status', function($row) {
                 if ($row->selesai)
@@ -94,6 +98,14 @@ class TransaksiController extends Controller
                 'title' => 'Name',
             ],
             [
+                'data' => 'invoice',
+                'title' => 'Invoice',
+            ],
+            [
+                'data' => 'created_at',
+                'title' => 'Tanggal',
+            ],
+            [
                 'data' => 'price_total',
                 'title' => 'Total Belanja',
             ],
@@ -114,10 +126,13 @@ class TransaksiController extends Controller
                 'orderable' => false,
             ]
         ])
+        ->ajaxWithForm(null, '#form-filter-tanggal')
         ->orderBy(0)
         ->minifiedAjax();
 
-        return view('admin.transaksi.index', compact('datatable'));
+        $kategoris = Kategori::all();
+
+        return view('admin.transaksi.index', compact('datatable', 'kategoris'));
     }
 
     /**
@@ -182,6 +197,8 @@ class TransaksiController extends Controller
             $data = $request->validate([
                 'keterangan_ditolak' => 'required',
             ]);
+
+            $data['selesai'] = false;
 
             $transaksi->update($data);
 

@@ -1,4 +1,4 @@
-<nav class="fixed-top bg-white pt-4 pb-2">
+<nav class="fixed-top bg-light pt-4 pb-2">
     <div class="navbar navbar-expand navbar-light">
         <div class="container">
             <a href="{{ route('home') }}" class="navbar-brand me-5 fw-bold">

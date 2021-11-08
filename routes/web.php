@@ -37,5 +37,6 @@ Route::middleware('auth')->group(function() {
 		Route::resource('produk', 'ProdukController');
 		Route::resource('kategori', 'KategoriController');
 		Route::resource('transaksi', 'TransaksiController');
+		Route::resource('user', 'UserController');
 	});
 });

@@ -231,6 +231,10 @@ return [
         ],
         ['header' => 'Pengelolaan'],
         [
+            'text' => 'Kelola User',
+            'route' => 'admin.user.index',
+        ],
+        [
             'text' => 'Kelola Kategori',
             'route' => 'admin.kategori.index',
         ],
