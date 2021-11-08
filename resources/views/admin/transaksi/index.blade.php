@@ -16,6 +16,7 @@
 		<form id="form-filter-kategori" class="form-group">
 			<label>Kategori</label>
 			<select class="form-control" name="kategori_id">
+				<option value="-1">Semua</option>
 				@foreach($kategoris as $kategori)
 				<option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
 				@endforeach
