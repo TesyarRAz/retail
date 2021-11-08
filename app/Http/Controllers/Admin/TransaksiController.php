@@ -136,8 +136,7 @@ class TransaksiController extends Controller
             ]
         ])
         ->ajaxWithForm(null, '#form-filter-tanggal')
-        ->orderBy(0)
-        ->minifiedAjax();
+        ->orderBy(0);
 
         $kategoris = Kategori::all();
 
