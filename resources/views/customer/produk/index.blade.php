@@ -18,7 +18,7 @@
 	@if(!$data->isEmpty())
 	<div class="row align-items-center">
 		@foreach ($data as $item)
-		<div class="col-lg-3 col-md-4 col-sm-6">
+		<div class="col-lg-2 col-md-3 col-sm-6">
 			<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 				<div class="card shadow">
 					<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
