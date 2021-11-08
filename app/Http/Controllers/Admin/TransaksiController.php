@@ -146,7 +146,9 @@ class TransaksiController extends Controller
             ]
         ])
         ->ajaxWithForm(null, '#form-filter-kategori')
-        ->drawCallback('function() { $("#total").text( this.api().ajax.json().data.map(e => parseInt(e.price_total.replaceAll(".", ""))).reduce((a, b) => a + b, 0) ) }')
+        ->drawCallback("function() { $('#total').text( new Intl.NumberFormat('id-ID',
+     { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
+   ).format(this.api().ajax.json().data.map(e => parseInt(e.price_total.replaceAll('.', ''))).reduce((a, b) => a + b, 0)) ) }")
         ->orderBy(0);
 
         $kategoris = Kategori::all();
