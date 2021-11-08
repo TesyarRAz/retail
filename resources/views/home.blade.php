@@ -51,7 +51,7 @@
 				@foreach ($kategoris as $item)
 				<div class="col mb-2">
 					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="text-reset text-decoration-none">
-						<div class="kategori-card p-2 rounded-3">
+						<div class="kategori-card p-2 rounded-3 mx-auto">
 							<div class="d-flex flex-column align-items-center justify-content-center h-100">
 								<img src="{{ $item->gambar }}" width="100" height="100">
 								<div class="text-white fw-bold text-center">
