@@ -66,7 +66,7 @@
 	</div>
 	<div class="mt-2 @if ($transaksi->jenis == 'diambil') d-none @endif">
 		<span class="d-block">Ongkos Kirim</span>
-		<span class="fw-bold">
+		<span class="fw-bold text-danger">
 			@if (filled($transaksi->ongkir))
 			Rp. {{ number_format($transaksi->ongkir, 0, ',', '.') }}
 			@else
