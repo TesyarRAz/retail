@@ -51,7 +51,7 @@
 						<span class="fw-bold">Penjual</span>
 						<hr>
 
-						<div class="text-center">
+						<div class="text-center text-wrap">
 							<div class="badge bg-primary">
 								<span class="h5 fw-bold">{{ $produk->kategori->name }}</span>
 							</div>
