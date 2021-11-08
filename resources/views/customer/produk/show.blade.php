@@ -28,12 +28,12 @@
 
 						<span class="mt-1 text-muted">Jumlah yang ingin dibeli</span>
 
-						<div class="mt-2 d-flex w-50">
-							<button type="button" class="btn btn-sm btn-primary me-2" onclick="decrementQty()">
+						<div class="mt-2 d-flex w-50" x-data="{ qty: 1 }">
+							<button type="button" class="btn btn-sm btn-primary me-2" x-on:click="qty--">
 								<span class="fw-bold fs-5">-</span>
 							</button>
-							<input class="form-control form-control-sm text-center" type="number" name="qty" id="qty" value="1" required>
-							<button type="button" class="btn btn-sm btn-primary ms-2" onclick="incrementQty()">
+							<input class="form-control form-control-sm text-center" type="number" name="qty" x-model="qty" required>
+							<button type="button" class="btn btn-sm btn-primary ms-2" x-on:click="qty++">
 								<span class="fw-bold fs-5">+</span>
 							</button>
 						</div>
@@ -74,7 +74,8 @@
 @endsection
 
 @push('js')
-<script type="text/javascript">
+<script src="//unpkg.com/alpinejs"></script>
+{{-- <script type="text/javascript">
 	let qty = document.querySelector("#qty");
 	window.decrementQty = () => {
 		qty.value = parseInt(qty.value || 0) - 1;
@@ -82,5 +83,5 @@
 	window.incrementQty = () => {
 		qty.value = parseInt(qty.value || 0) + 1;
 	}
-</script>
+</script> --}}
 @endpush

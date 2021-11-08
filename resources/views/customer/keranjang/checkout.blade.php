@@ -5,7 +5,7 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<div>
 				Invoice - <span class="fw-bold">{{ $checkout->invoice }}</span>
-				<div>
+				<div class="mt-2">
 					@if ($checkout->jenis == 'dikirim' && blank($checkout->ongkir))
 					<span class="badge bg-danger">Ongkir belum diatur admin</span>
 					@elseif (blank($checkout->bukti_transaksi))
