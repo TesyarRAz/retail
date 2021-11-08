@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	<div class="card">
+	<div class="card mt-2">
 		<div class="card-body">
 			@if(!$data->isEmpty())
 			<div class="row align-items-center">
