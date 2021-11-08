@@ -23,15 +23,15 @@ class KeranjangController extends Controller
 
         if ($request->type == 'keranjang')
         {
-            $datas = auth()->user()->keranjangs()->select('detail_transaksis.*')->with('produk')->get();
+            $datas = auth()->user()->keranjangs()->latest()->select('detail_transaksis.*')->with('produk')->get();
         }
         else if ($request->type == 'checkout')
         {
-            $datas = auth()->user()->checkouts;
+            $datas = auth()->user()->checkouts()->latest()->get();
         }
         else if ($request->type == 'selesai')
         {
-            $datas = auth()->user()->transaksis()->where('selesai', true)->get();
+            $datas = auth()->user()->transaksis()->latest()->where('selesai', true)->get();
         }
 
         return view('customer.keranjang.index', compact('datas'));
