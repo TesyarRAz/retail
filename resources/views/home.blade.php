@@ -47,9 +47,9 @@
 			<span class="card-title fw-bold fs-6">Kategori</span>
 			<hr>
 
-			<div class="row align-items-center">
+			<div class="row cols-2">
 				@foreach ($kategoris as $item)
-				<div class="col-auto mb-2 mx-auto">
+				<div class="col mb-2">
 					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="text-reset text-decoration-none">
 						<div class="kategori-card p-2 rounded-3">
 							<div class="d-flex flex-column align-items-center justify-content-center h-100">
