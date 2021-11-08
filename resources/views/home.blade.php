@@ -75,7 +75,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
+						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
 						<div class="card-body">
 							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
 							<span class="text-break d-block">{{$item->name }}</span>
@@ -106,7 +106,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
+						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
 						<div class="card-body">
 							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
 							<span class="text-break d-block">{{$item->name }}</span>
@@ -137,7 +137,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
+						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
 						<div class="card-body">
 							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
 							<span class="text-break d-block">{{$item->name }}</span>
