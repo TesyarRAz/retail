@@ -18,7 +18,8 @@ class UserController extends Controller
         if ($request->ajax())
         {
             return datatables()->of(
-                User::whereNotIn('id', [auth()->user()->id])->withCount('transaksis')
+                User::whereNotIn('id', [auth()->user()->id])
+                    ->withCount('transaksis')
             )
             ->addColumn('aksi', function($row) {
                 $id = $row->id;
@@ -146,7 +147,9 @@ class UserController extends Controller
     {
         try
         {
-            $user->delete();
+            \DB::transaction(function() {
+                $user->delete();
+            });
         }
         catch (\Exception $ex)
         {
