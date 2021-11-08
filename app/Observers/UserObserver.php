@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Models\DetailTransaksi;
 use App\Models\Transaksi;
 
 class UserObserver
