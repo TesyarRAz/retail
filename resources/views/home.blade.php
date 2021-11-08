@@ -72,7 +72,7 @@
 				<img src="{{ asset('assets/images/iklan.jpg') }}" alt="">
 			</div>
 			@foreach ($terlaris as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+			<div class="col-lg-3 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
 						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
@@ -103,7 +103,7 @@
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
 			@foreach ($terbaru as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+			<div class="col-lg-3 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
 						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
@@ -134,7 +134,7 @@
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
 			@foreach ($produks as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+			<div class="col-lg-3 col-md-3 col-sm-6 mb-2">
 				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
 					<div class="card shadow">
 						<img class="card-img-top" src="{{ $item->image }}" width="200" height="200" alt="">
