@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row justify-content-center mt-5">
 		<div class="col-lg-8 col-md-10">
-			<form class="p-3 border" action="{{ route('postLogin') }}" method="post" autocomplete="off">
+			<form class="p-3 border bg-white" action="{{ route('postLogin') }}" method="post" autocomplete="off">
 				@csrf
 
 				<h4 class="fw-bold">Login</h4>
