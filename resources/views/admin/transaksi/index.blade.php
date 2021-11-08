@@ -32,6 +32,20 @@
 					@endforeach
 				</select>
 			</div>
+			<div class="form-group">
+				<label>Filter Tanggal</label>
+				<div class="form-row no-gutters">
+					<div class="col-lg-4">
+						<input type="date" name="from" class="form-control form-control-sm" value="{{ now()->subDay(1)->format('Y-m-d') }}">
+					</div>
+					<div class="col-auto">
+						-
+					</div>
+					<div class="col-lg-4">
+						<input type="date" name="to" class="form-control form-control-sm" value="{{ now()->format('Y-m-d') }}">
+					</div>
+				</div>
+			</div>
 		</form>
 
 		{!! $datatable->table() !!}
