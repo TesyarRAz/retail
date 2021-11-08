@@ -164,7 +164,7 @@ class ProdukController extends Controller
             'description' => 'bail',
         ]);
 
-        if ($data['image'] != null)
+        if ($request->hasFile('image') != null)
         {
             $data['image'] = $request->image->storeAs(
                 'user/' . auth()->user()->username . '/image',
