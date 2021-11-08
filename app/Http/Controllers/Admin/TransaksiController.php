@@ -30,6 +30,13 @@ class TransaksiController extends Controller
                 ->when($request->has('kategori_id') && $request->kategori_id != -1, fn($query) =>
                     $query->whereHas('details.produk', fn($query) => $query->where('kategori_id', $request->kategori_id))
                 )
+                ->when($request->has('status'), fn($query) => $query
+                    ->when($request->status == 'selesai', fn($query) => $query->where('selesai', true))
+                    ->when($request->status == 'ditolak', fn($query) => $query->whereNotNull('keterangan_ditolak'))
+                    ->when($request->status == 'ongkir', fn($query) => $query->where('jenis', 'dikirim')->whereNull('ongkir'))
+                    ->when($request->status == 'bukti', fn($query) => $query->whereNull('bukti_transaksi'))
+                    ->when($request->status == 'konfirmasi', fn($query) => $query->whereNotNull('bukti_transaksi')->whereNull('keterangan_ditolak'))
+                )
                 ->latest(),
             )
             ->editColumn('price_total', function($row) {
