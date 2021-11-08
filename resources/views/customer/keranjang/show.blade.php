@@ -107,8 +107,8 @@
 		
 		<h4>Upload Bukti Pembayaran</h4>
 		<hr>
-		<p>Silahkan lakukan pembayaran ke no rek berikut ini 0000000 a. n SMKN 2 Sukabumi atau lakukan pembayaran langsung di Sekolah dengan total pembayaran : 
-			<span class="fw-bold text-danger">Rp. {{ number_format($transaksi->details->sum('price_total') + $transaksi->ongkir, 0, ',', '.') }}</span>
+		<p class="fw-bold text-danger">Silahkan lakukan pembayaran ke no rek berikut ini 0000000 a. n SMKN 2 Sukabumi atau lakukan pembayaran langsung di Sekolah dengan total pembayaran : 
+			Rp. {{ number_format($transaksi->details->sum('price_total') + $transaksi->ongkir, 0, ',', '.') }}
 		</p>
 		<div class="mb-2" >
 			<label class="fw-bold form-label">Bukti Pembayaran <span class="text-danger">*</span></label>

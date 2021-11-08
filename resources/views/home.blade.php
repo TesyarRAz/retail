@@ -49,7 +49,7 @@
 
 			<div class="row align-items-center">
 				@foreach ($kategoris as $item)
-				<div class="col-auto mb-2">
+				<div class="col-auto mb-2 mx-auto">
 					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="text-reset text-decoration-none">
 						<div class="kategori-card p-2 rounded-3">
 							<div class="d-flex flex-column align-items-center justify-content-center h-100">
