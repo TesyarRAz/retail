@@ -55,7 +55,7 @@
 
 			let url_target = `{{ url('admin/produk') }}/${id}`;
 			$.getJSON(url_target, function(data) {
-				modal.find("input,textarea").val(function(index, value) {
+				modal.find("input,textarea,select").val(function(index, value) {
 					return ['_method', '_token', 'image'].includes(this.name) ? value : (data[this.name]);
 				}).trigger("input");
 
