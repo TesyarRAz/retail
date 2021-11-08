@@ -19,7 +19,9 @@ class UserController extends Controller
         {
             return datatables()->of(
                 User::whereNotIn('id', [auth()->user()->id])
+                    ->whereDoesntHave('transaksis')
                     ->withCount('transaksis')
+                    ->orderBy('transaksis_count')
             )
             ->addColumn('aksi', function($row) {
                 $id = $row->id;
