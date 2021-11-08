@@ -26,7 +26,7 @@ class UserController extends Controller
                 $csrf = csrf_field();
                 $delete = method_field('delete');
 
-                $delete_route = route('admin.produk.destroy', $id);
+                $delete_route = route('admin.user.destroy', $id);
 
                 return <<< blade
                 <!-- <button class="btn btn-sm mb-1 btn-primary" onclick="edit('$id')">

@@ -29,7 +29,7 @@
 				</div>
 				<div class="form-group" data-toggle="image-preview">
 					<label>Gambar <span class="text-danger">*</span></label>
-					<input type="file" name="image" class="d-none" data-source="true" accept="image/*" required>
+					<input type="file" name="image" class="d-none" data-source="true" accept="image/*">
 					<img src="{{ asset('assets/images/empty-image.png') }}" role="button" class="d-block img-thumbnail" width="300" height="300" data-target="true">
 				</div>
 				<div class="form-group">
