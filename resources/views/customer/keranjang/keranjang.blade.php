@@ -1,6 +1,6 @@
 @if(!$datas->isEmpty())
 @foreach ($datas as $item)
-<div class="card shadow">
+<div class="card shadow mb-1">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-3">

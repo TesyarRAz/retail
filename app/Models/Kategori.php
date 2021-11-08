@@ -11,6 +11,10 @@ class Kategori extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'gambar' => 'App\Casts\PublicFileCast',
+    ];
+
     public function produks()
     {
         return $this->hasMany(Produk::class);

@@ -12,9 +12,13 @@
 
 		<div class="row">
 			<div class="col-lg-8">
-				<div class="row">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
 					<div class="col-md-6">
-						<img src="{{ $produk->image }}" class="img-thumbnail">
+						<div class="d-flex justify-content-center align-items-center h-100">
+							<img src="{{ $produk->image }}" style="min-width: 200px; min-height: 200px;" class="img-thumbnail">
+						</div>
 					</div>
 					<div class="col-md-6">
 						<span class="badge bg-primary">{{ $produk->kategori->name }}</span>
@@ -44,6 +48,8 @@
 						</div>
 					</div>
 				</div>
+					</div>
+				</div>
 			</div>
 			<div class="col-lg-4 mt-5 mt-lg-0">
 				<div class="card">
@@ -51,9 +57,12 @@
 						<span class="fw-bold">Penjual</span>
 						<hr>
 
-						<div class="text-center">
-							<div class="badge bg-primary">
-								<span class="h5 fw-bold text-wrap">{{ $produk->kategori->name }}</span>
+						<div class="kategori-card p-2 rounded-3 mx-auto">
+							<div class="d-flex flex-column align-items-center justify-content-center h-100">
+								<img src="{{ $produk->kategori->gambar }}" width="100" height="100">
+								<div class="fw-bold text-center">
+									<span class="small">{{ $produk->kategori->name }}</span>
+								</div>
 							</div>
 						</div>
 

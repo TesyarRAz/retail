@@ -89,6 +89,15 @@ class KategoriController extends Controller
             'name' => 'required',
         ]);
 
+        if ($request->hasFile('gambar'))
+        {
+            $data['gambar'] = $request->gambar->storeAs(
+                'user/' . auth()->user()->username . '/image',
+                \Str::random(40) . '.' . $request->gambar->getClientOriginalExtension(),
+                'public',
+            );
+        }
+
         Kategori::create($data);
 
         return back()->with('status', 'Berhasil tambah kategori');
@@ -128,6 +137,15 @@ class KategoriController extends Controller
         $data = $request->validate([
             'name' => 'required',
         ]);
+
+        if ($request->hasFile('gambar'))
+        {
+            $data['gambar'] = $request->gambar->storeAs(
+                'user/' . auth()->user()->username . '/image',
+                \Str::random(40) . '.' . $request->gambar->getClientOriginalExtension(),
+                'public',
+            );
+        }
 
         $kategori->update($data);
 

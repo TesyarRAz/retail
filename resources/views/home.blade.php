@@ -50,7 +50,16 @@
 			<div class="row align-items-center">
 				@foreach ($kategoris as $item)
 				<div class="col-auto mb-2">
-					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="fw-bold btn btn-success">{{ $item->name }}</a>
+					<a href="{{ route('customer.produk.index', ['kategori' => $item->name]) }}" class="text-reset text-decoration-none">
+						<div class="kategori-card p-2 rounded-3">
+							<div class="d-flex flex-column align-items-center justify-content-center h-100">
+								<img src="{{ $item->gambar }}" width="100" height="100">
+								<div class="text-white fw-bold text-center">
+									<span class="small">{{ $item->name }}</span>
+								</div>
+							</div>
+						</div>
+					</a>
 				</div>
 				@endforeach
 			</div>
@@ -71,20 +80,26 @@
 			<div class="col-lg-2 col-md-4 col-sm-6 d-none d-lg-block">
 				<img src="{{ asset('assets/images/iklan.jpg') }}" alt="">
 			</div>
-			@foreach ($terlaris as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
-				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
-					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
-						<div class="card-body">
-							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
-							<span class="text-break d-block">{{$item->name }}</span>
-							<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+			<div class="card col">
+				<div class="card-body">
+					<div class="row">
+						@foreach ($terlaris as $item)
+						<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+							<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
+								<div class="card shadow">
+									<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
+									<div class="card-body">
+										<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
+										<span class="text-break d-block">{{$item->name }}</span>
+										<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+									</div>
+								</div>
+							</a>
 						</div>
+						@endforeach
 					</div>
-				</a>
+				</div>
 			</div>
-			@endforeach
 		</div>
 	</div>
 
@@ -102,20 +117,26 @@
 			<div class="col-lg-2 col-md-4 col-sm-6 d-none d-lg-block">
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
-			@foreach ($terbaru as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
-				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
-					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
-						<div class="card-body">
-							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
-							<span class="text-break d-block">{{$item->name }}</span>
-							<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+			<div class="card col">
+				<div class="card-body">
+					<div class="row">
+						@foreach ($terbaru as $item)
+						<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+							<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
+								<div class="card shadow">
+									<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
+									<div class="card-body">
+										<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
+										<span class="text-break d-block">{{$item->name }}</span>
+										<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+									</div>
+								</div>
+							</a>
 						</div>
+						@endforeach
 					</div>
-				</a>
+				</div>
 			</div>
-			@endforeach
 		</div>
 	</div>
 
@@ -133,20 +154,26 @@
 			<div class="col-lg-2 col-md-4 col-sm-6 d-none d-lg-block">
 				<img src="{{ asset('assets/images/iklan-2.jpg') }}" alt="">
 			</div>
-			@foreach ($produks as $item)
-			<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
-				<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
-					<div class="card shadow">
-						<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
-						<div class="card-body">
-							<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
-							<span class="text-break d-block">{{$item->name }}</span>
-							<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+			<div class="card col">
+				<div class="card-body">
+					<div class="row">
+						@foreach ($produks as $item)
+						<div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+							<a href="{{ route('customer.produk.show', $item->id) }}" class="text-reset text-decoration-none">
+								<div class="card shadow">
+									<img class="card-img-top" src="{{ $item->image }}" width="150" height="150" alt="">
+									<div class="card-body">
+										<span class="badge small bg-success text-wrap">{{ $item->kategori->name }}</span>
+										<span class="text-break d-block">{{$item->name }}</span>
+										<span class="card-subtitle fw-bold">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+									</div>
+								</div>
+							</a>
 						</div>
+						@endforeach
 					</div>
-				</a>
+				</div>
 			</div>
-			@endforeach
 		</div>
 	</div>
 </div>
