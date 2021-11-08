@@ -37,7 +37,7 @@ class TransaksiController extends Controller
                     ->when($request->status == 'bukti', fn($query) => $query->whereNull('bukti_transaksi')->whereNotNull('ongkir')->whereNull('keterangan_ditolak')->where('selesai', false))
                     ->when($request->status == 'konfirmasi', fn($query) => $query->whereNotNull('bukti_transaksi')->whereNull('keterangan_ditolak')->where('selesai', false))
                 )
-                ->when($request->has('from', 'to'), fn($query) => $query
+                ->when($request->filled('from', 'to'), fn($query) => $query
                     ->whereBetween('transaksis.updated_at', [request('from'), \Date::createFromFormat('Y-m-d', request('to'))->addDay(1)])
                 )
                 ->latest(),
