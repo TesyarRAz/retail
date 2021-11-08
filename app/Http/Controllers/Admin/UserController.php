@@ -147,6 +147,6 @@ class UserController extends Controller
             return back()->with('status', 'Gagal hapus user');
         }
 
-        return back()->with('status', 'Berhasil hapus user')
+        return back()->with('status', 'Berhasil hapus user');
     }
 }

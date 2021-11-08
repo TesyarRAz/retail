@@ -1,7 +1,7 @@
 @if(!$datas->isEmpty())
 <div class="list-group">
 	@foreach ($datas as $checkout)
-	<a href="{{ route('customer.keranjang.show', $checkout->id) }}" class="list-group-item list-group-item-action">
+	<a href="{{ route('customer.keranjang.show', $checkout->id) }}" class="list-group-item list-group-item-action mb-2">
 		<div class="d-flex justify-content-between align-items-center">
 			<div>
 				Invoice - <span class="fw-bold">{{ $checkout->invoice }}</span>
