@@ -242,6 +242,15 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        
+        try
+        {
+            $transaksi->delete();
+        }
+        catch (\Exception $ex)
+        {
+            return back()->with('status', 'Gagal hapus transaksi');
+        }
+
+        return back()->with('status', 'Berhasil hapus transaksi');
     }
 }

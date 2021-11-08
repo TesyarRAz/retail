@@ -18,7 +18,7 @@ class UserController extends Controller
         if ($request->ajax())
         {
             return datatables()->of(
-                User::whereNotIn('id', [auth()->user()->id])->get()
+                User::whereNotIn('id', [auth()->user()->id])->withCount('transaksis')
             )
             ->addColumn('aksi', function($row) {
                 $id = $row->id;
@@ -61,6 +61,12 @@ class UserController extends Controller
             [
                 'data' => 'username',
                 'title' => 'Username',
+            ],
+            [
+                'data' => 'transaksis_count',
+                'title' => 'Total Transaksi',
+                'orderable' => false,
+                'searchable' => false,
             ],
             [
                 'title' => 'Aksi',
