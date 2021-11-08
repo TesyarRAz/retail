@@ -49,6 +49,11 @@
 		</form>
 
 		{!! $datatable->table() !!}
+
+		<hr>
+		<div>
+			<span class="font-weight-bold">Total : <span id="total"></span></span>
+		</div>
 	</div>
 </div>
 

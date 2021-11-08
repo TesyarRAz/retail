@@ -146,6 +146,7 @@ class TransaksiController extends Controller
             ]
         ])
         ->ajaxWithForm(null, '#form-filter-kategori')
+        ->drawCallback('function() { $("#total").val( this.api().ajax.json().data.map(e => e.price_total).reduce((a, b) => a + b, 0) ) }')
         ->orderBy(0);
 
         $kategoris = Kategori::all();
