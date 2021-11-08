@@ -12,7 +12,7 @@
 
     @stack('css')
 </head>
-<body>
+<body class="bg-light">
     @stack('before_content')
 
     @yield('content')
