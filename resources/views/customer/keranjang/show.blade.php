@@ -62,7 +62,7 @@
 	<hr>
 	<div>
 		<span class="d-block">Total</span>
-		<span class="fw-bold">Rp. {{ number_format($transaksi->details->sum('price_total'), 0, ',', '.') }}</span>
+		<span class="fw-bold text-danger">Rp. {{ number_format($transaksi->details->sum('price_total'), 0, ',', '.') }}</span>
 	</div>
 	<div class="mt-2 @if ($transaksi->jenis == 'diambil') d-none @endif">
 		<span class="d-block">Ongkos Kirim</span>
@@ -107,7 +107,9 @@
 		
 		<h4>Upload Bukti Pembayaran</h4>
 		<hr>
-		<p>Silahkan lakukan pembayaran ke no rek berikut ini 0000000 atau lakukan pembayaran langsung</p>
+		<p>Silahkan lakukan pembayaran ke no rek berikut ini 0000000 a. n SMKN 2 Sukabumi atau lakukan pembayaran langsung di Sekolah dengan total pembayaran : 
+			<span class="fw-bold text-danger">Rp. {{ number_format($transaksi->details->sum('price_total') + $transaksi->ongkir, 0, ',', '.') }}</span>
+		</p>
 		<div class="mb-2" >
 			<label class="fw-bold form-label">Bukti Pembayaran <span class="text-danger">*</span></label>
 			<input type="file" name="bukti_transaksi" class="form-control" accept="image/*" required>
