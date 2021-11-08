@@ -21,9 +21,11 @@ class TransaksiController extends Controller
             return datatables()->of(
                 Transaksi::select('transaksis.*')
                 ->where(fn($query) => 
-                    $query->where('jenis', 'diambil')->whereNotNull('bukti_transaksi')
+                    $query->->where(fn($query) => 
+                        $query->where('jenis', 'diambil')->whereNotNull('bukti_transaksi')
+                    )
+                    ->orWhere('jenis', 'dikirim')
                 )
-                ->orWhere('jenis', 'dikirim')
                 ->with('details', 'user')
                 ->when($request->has('kategori_id') && $request->kategori_id != -1, fn($query) =>
                     $query->whereHas('details.produk', fn($query) => $query->where('kategori_id', $request->kategori_id))
