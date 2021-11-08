@@ -37,6 +37,7 @@ class UserObserver
      */
     public function deleting(User $user)
     {
+        DetailTransaksi::destroy($user->keranjangs()->pluck('id'));
         Transaksi::destroy($user->transaksis()->pluck('id'));
     }
 

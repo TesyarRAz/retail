@@ -147,9 +147,7 @@ class UserController extends Controller
     {
         try
         {
-            \DB::transaction(function() {
-                $user->delete();
-            });
+            $user->delete();
         }
         catch (\Exception $ex)
         {
