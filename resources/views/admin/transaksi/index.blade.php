@@ -13,7 +13,7 @@
 		<span class="card-title">Daftar Transaksi</span>
 	</div>
 	<div class="card-body">
-		<form id="form-filter-kategori" class="form-group">
+		<form id="form-filter-kategori" class="form-group" onchange="">
 			<label>Kategori</label>
 			<select class="form-control" name="kategori_id">
 				<option value="-1">Semua</option>
@@ -31,4 +31,10 @@
 
 @push('js')
 {!! $datatable->scripts() !!}
+
+<script type="text/javascript">
+	$("#form-filter-kategori").on('change', function() {
+		window?.LaravelDataTables?.dataTableBuilder?.ajax?.reload();
+	});
+</script>
 @endpush
