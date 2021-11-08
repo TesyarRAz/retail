@@ -31,10 +31,10 @@ class TransaksiController extends Controller
                     $query->whereHas('details.produk', fn($query) => $query->where('kategori_id', $request->kategori_id))
                 )
                 ->when($request->has('status'), fn($query) => $query
-                    ->when($request->status == 'selesai', fn($query) => $query->where('selesai', true))
+                    ->when(in_array($request->status, ['selesai', 'ditolak', 'ongkir', 'bukti', 'konfirmasi']), fn($query) => $query->where('selesai', true))
                     ->when($request->status == 'ditolak', fn($query) => $query->whereNotNull('keterangan_ditolak'))
-                    ->when($request->status == 'ongkir', fn($query) => $query->where('jenis', 'dikirim')->whereNull('ongkir'))
-                    ->when($request->status == 'bukti', fn($query) => $query->whereNull('bukti_transaksi'))
+                    ->when($request->status == 'ongkir', fn($query) => $query->where('jenis', 'dikirim')->whereNull('ongkir')->whereNull('keterangan_ditolak'))
+                    ->when($request->status == 'bukti', fn($query) => $query->whereNull('bukti_transaksi')->whereNull('keterangan_ditolak'))
                     ->when($request->status == 'konfirmasi', fn($query) => $query->whereNotNull('bukti_transaksi')->whereNull('keterangan_ditolak'))
                 )
                 ->latest(),
