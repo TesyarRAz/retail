@@ -18,7 +18,7 @@
 				<input type="hidden" name="status" x-model="status">
 				<a class="nav-item nav-link" href="#" x-on:click="status = 'semua'" :class="status == 'semua' && 'active'">Semua</a>
 				<a class="nav-item nav-link" href="#" x-on:click="status = 'ongkir'" :class="status == 'ongkir' && 'active'">Ongkir</a>
-				<a class="nav-item nav-link" href="#" x-on:click="status = 'bukti'" :class="status == 'bukti' && 'active'">Bukti</a>
+				{{-- <a class="nav-item nav-link" href="#" x-on:click="status = 'bukti'" :class="status == 'bukti' && 'active'">Bukti</a> --}}
 				<a class="nav-item nav-link" href="#" x-on:click="status = 'ditolak'" :class="status == 'ditolak' && 'active'">Ditolak</a>
 				<a class="nav-item nav-link" href="#" x-on:click="status = 'konfirmasi'" :class="status == 'konfirmasi' && 'active'">Konfirmasi</a>
 				<a class="nav-item nav-link" href="#" x-on:click="status = 'selesai'" :class="status == 'selesai' && 'active'">Selesai</a>
